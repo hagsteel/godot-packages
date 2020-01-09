@@ -1,0 +1,13 @@
+name = "basic-transition"
+author = "Hagsteel"
+version = "0.2"
+description = "A basic transition"
+usage = """
+1.  Open up the `Transition.tscn` and add a gradient texture to the `Mask` shader parameter.
+2.  Add the Transition as an AutoLoad in project settings.
+3.  call either `AnimationPlayer.play("FadeIn")` or `AnimationPlayer.play("FadeOut")`
+"""
+
+files = [
+    "Transition.tscn",
+]

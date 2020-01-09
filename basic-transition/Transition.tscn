@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+render_mode unshaded;
+
+uniform float cutoff : hint_range(0.0, 1.0);
+uniform float smooth_size : hint_range(0.0, 1.0);
+uniform sampler2D mask : hint_albedo;
+
+void fragment() {
+	float value = texture(mask, UV).r;
+	float alpha = smoothstep(cutoff, cutoff + smooth_size, value * (1.0 - smooth_size) + smooth_size);
+	COLOR = vec4(COLOR.rgb, alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 1 )
+shader_param/cutoff = 1.0
+shader_param/smooth_size = 0.5
+
+[sub_resource type="Animation" id=4]
+resource_name = "FadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0423986, 1.95156 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 4 )
+anims/FadeOut = SubResource( 5 )
