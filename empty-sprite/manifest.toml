@@ -1,0 +1,9 @@
+name = "empty-sprite"
+author = "Hagsteel"
+version = "0.1"
+description = "An empty sprite"
+usage = ""
+
+files = [
+    "Sprite.png",
+]
