@@ -1,0 +1,9 @@
+name = "simple-sprite"
+author = "Hagsteel"
+version = "0.1"
+description = "A simple sprite"
+usage = ""
+
+files = [
+    "Sprite.png",
+]
